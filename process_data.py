@@ -4,6 +4,35 @@ import librosa
 import pandas as pd
 
 
+# def extract_features(file_path, n_mfcc=13, n_fft=1024, hop_length=512, n_mels=40):
+#     """
+#     Extracts MFCCs and their derivatives from an audio file, according to the parameters suggested in the paper.
+#
+#     Parameters:
+#     - file_path: Path to the audio file.
+#     - n_mfcc: Number of MFCCs to extract.
+#     - n_fft: FFT window size.
+#     - hop_length: Number of samples between successive frames.
+#     - n_mels: Number of Mel bands.
+#
+#     Returns:
+#     - features: Concatenated MFCCs, delta MFCCs, and delta-delta MFCCs.
+#     """
+#     audio, sample_rate = librosa.load(file_path, sr=None, res_type='kaiser_fast')
+#     # Compute MFCCs
+#     mfccs = librosa.feature.mfcc(y=audio, sr=sample_rate, n_mfcc=n_mfcc, n_fft=n_fft, hop_length=hop_length, n_mels=n_mels)
+#     # Compute delta MFCCs
+#     delta_mfccs = librosa.feature.delta(mfccs)
+#     # Compute delta-delta MFCCs
+#     delta2_mfccs = librosa.feature.delta(mfccs, order=2)
+#     # Average the MFCCs, delta MFCCs, and delta-delta MFCCs across the time dimension and concatenate
+#     avg_mfccs = np.mean(mfccs, axis=1)
+#     avg_delta_mfccs = np.mean(delta_mfccs, axis=1)
+#     avg_delta2_mfccs = np.mean(delta2_mfccs, axis=1)
+#     features = np.hstack((avg_mfccs, avg_delta_mfccs, avg_delta2_mfccs))
+#
+#     return features
+
 def extract_features(file_path, n_mfcc=20):
     """
     Extracts features from an audio file.
