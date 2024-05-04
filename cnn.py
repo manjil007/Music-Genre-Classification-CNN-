@@ -20,7 +20,7 @@ def create_filtered_directory(source_dir, target_dir):
                 os.makedirs(target_genre_dir, exist_ok=True)  # Ensures target directory exists
 
                 for file in os.listdir(genre_path):
-                    if file.endswith('_log.png'):
+                    if file.endswith('.png'):
                         src_path = os.path.join(genre_path, file)
                         target_path = os.path.join(target_genre_dir, file)
                         shutil.copy(src_path, target_path)  # Copy files instead of creating symbolic links
@@ -35,13 +35,14 @@ def create_filtered_directory(source_dir, target_dir):
                 print(f"Copied {src_path} to {target_path}")
 
 
-filtered_train_dir = '/nfs/student/m/mpradhan007/PycharmProjects/neural_network/spectrogram_images_filtered/train'
-filtered_test_dir = '/nfs/student/m/mpradhan007/PycharmProjects/neural_network/spectrogram_images_filtered/test'
+filtered_train_dir = '/nfs/student/m/mpradhan007/PycharmProjects/neural_network/spectrogram_images/train'
+filtered_test_dir = '/nfs/student/m/mpradhan007/PycharmProjects/neural_network/spectrogram_images/test'
 
 # Create an instance of ImageDataGenerator for preprocessing and augmentation
 train_datagen = ImageDataGenerator(
     rescale=1. / 255,  # Normalize pixel values
     rotation_range=20,  # Random rotation between 0 and 20 degrees
+    #HAVE TO TRY IT USING SAME ROTATION FOR BOTH TRAIN AND TEST
     width_shift_range=0.2,  # Random horizontal shifts
     height_shift_range=0.2,  # Random vertical shifts
     shear_range=0.2,  # Shear transformations
@@ -74,11 +75,11 @@ validation_generator = train_datagen.flow_from_directory(
 
 # Define the CNN Model
 model = models.Sequential([
-    layers.Conv2D(32, (3, 3), activation='relu', input_shape=(128, 128, 3)),
+    layers.Conv2D(32, (4, 4), activation='relu', input_shape=(128, 128, 3)),
     layers.MaxPooling2D((2, 2)),
-    layers.Conv2D(64, (3, 3), activation='relu'),
+    layers.Conv2D(64, (4, 4), activation='relu'),
     layers.MaxPooling2D((2, 2)),
-    layers.Conv2D(64, (3, 3), activation='relu'),
+    layers.Conv2D(64, (4, 4), activation='relu'),
     layers.Flatten(),
     layers.Dense(64, activation='relu'),
     layers.Dense(10, activation='softmax')  # Assuming 10 genres/classes
@@ -116,7 +117,7 @@ predicted_labels = [labels[k] for k in predicted_classes]
 
 # Extract filenames and convert to the required format
 filenames = test_generator.filenames
-ids = [f.split('/')[-1].replace('_log.png', '.au') for f in filenames]
+ids = [f.split('/')[-1].replace('.png', '.au') for f in filenames]
 results = pd.DataFrame({"id": ids, "class": predicted_labels})
 
 # Save the results to a CSV file for submission
