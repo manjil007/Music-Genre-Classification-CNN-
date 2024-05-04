@@ -19,8 +19,9 @@ class MLP(nn.Module):
         :param learning_rate: FLOAT of the learning rate
         """
         super(MLP, self).__init__()
-        self.fc1 = nn.Linear(input_size, hidden_size)
-        self.fc2 = nn.Linear(hidden_size, output_size)
+        self.fc1 = nn.Linear(input_size, hidden_size[0])
+        self.fc2 = nn.Linear(hidden_size[0], hidden_size[1])
+        self.fc3 = nn.Linear(hidden_size[1], output_size)
         self.dropout = nn.Dropout(dropout_rate)
         self.relu = nn.ReLU()
         self.cost = nn.CrossEntropyLoss()
@@ -29,7 +30,10 @@ class MLP(nn.Module):
     def forward(self, x):
         x = self.relu(self.fc1(x))
         x = self.dropout(x)
-        x = self.fc2(x)
+        x = self.relu(self.fc2(x))
+        x = self.dropout(x)
+        x = self.fc3(x)
+
         return x
 
 features = pd.read_csv('train_features.csv')
@@ -58,7 +62,7 @@ test_loader = DataLoader(test_dataset, batch_size=batch_size)
 
 # Initialize MLP model
 input_size = X_train.shape[1]
-hidden_size = 64  # 64, 23, 25, 32,
+hidden_size = [256,256]
 output_size = len(np.unique(y_train))  # Number of classes
 
 model = MLP(input_size, hidden_size, output_size, 0.001)
