@@ -54,9 +54,9 @@ Accuracy: 74% Leaderboard Position: 9 Date Submitted : 05/06/2024
 ### Contributions
 Manjil -
 
-Vincent -  
+Vincent - Worked on mlp.py and optimizing MLP parameters for highest possible accuracy using provided MLP sample code as reference. Worked on both MLP and optimization sections in the report.
 
-Erick - 
+Erick - Worked on extracting spectrograms from audio files using Professor Estrada's sample code as a starting point. Also worked on extracting Chroma features and zero-crossing rate, though since they did not provide as high an accuracy they were discarded. Helped with MLP and Optimizations sections of the report.
 
 Abhinav - 
 
