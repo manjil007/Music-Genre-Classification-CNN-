@@ -96,6 +96,7 @@ for epoch in range(num_epochs):
 
     # Validation
     model.eval()
+    predictions = []
     val_loss = 0.0
     correct_val = 0
     total_val = 0
@@ -108,6 +109,33 @@ for epoch in range(num_epochs):
             total_val += targets.size(0)
             correct_val += (predicted == targets).sum().item()
 
+    predicted_labels = label_encoder.inverse_transform(predictions)
+
+
     val_accuracy = correct_val / total_val
     print(
         f"Epoch {epoch + 1}/{num_epochs}, Validation Loss: {val_loss / len(val_loader):.4f}, Validation Accuracy: {100 * val_accuracy:.2f}%")
+
+test_features = pd.read_csv('test_features.csv')
+X_test = test_features.drop(columns=['id']).values
+X_test = scaler.transform(X_test)
+test_dataset = TensorDataset(torch.tensor(X_test, dtype=torch.float32))
+test_loader = DataLoader(test_dataset, batch_size=1)
+
+model.eval()
+predictions = []
+with torch.no_grad():
+    for inputs in test_loader:
+        outputs = model(inputs[0])  # inputs[0] contains the features
+        _, predicted = torch.max(outputs, 1)
+        predictions.extend(predicted.tolist())
+
+# Decode labels
+predicted_labels = label_encoder.inverse_transform(predictions)
+
+# Add predictions to the testing data
+test_data_with_predictions = test_features[['id']].copy()
+test_data_with_predictions['class'] = predicted_labels
+
+# Save predictions to CSV
+test_data_with_predictions.to_csv('mlp_predictions.csv', index=False)
