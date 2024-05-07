@@ -6,8 +6,8 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import pandas as pd
 import numpy as np
 
-filtered_train_dir = '/nfs/student/m/mpradhan007/PycharmProjects/neural_network/spectrogram_images_filtered/train'
-filtered_test_dir = '/nfs/student/m/mpradhan007/PycharmProjects/neural_network/spectrogram_images_filtered/test'
+filtered_train_dir = '/nfs/student/m/mpradhan007/PycharmProjects/neural_network/spectrogram_images/train'
+filtered_test_dir = '/nfs/student/m/mpradhan007/PycharmProjects/neural_network/spectrogram_images/test'
 
 # Adjust your ImageDataGenerator to use preprocess_input from ResNet50
 train_datagen = ImageDataGenerator(
@@ -62,7 +62,7 @@ model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accur
 
 history = model.fit(
     train_generator,
-    epochs=30,  # Adjust number of epochs as needed
+    epochs=20,  # Adjust number of epochs as needed
     validation_data=validation_generator
 )
 
@@ -87,7 +87,7 @@ predicted_labels = [labels[k] for k in predicted_classes]
 
 # Extract filenames and convert them to the required format
 filenames = test_generator.filenames
-ids = [f.split('/')[-1].replace('_log.png', '.au') for f in filenames]
+ids = [f.split('/')[-1].replace('.png', '.au') for f in filenames]
 results = pd.DataFrame({"id": ids, "class": predicted_labels})
 
 # Save the results to a CSV file for submission
