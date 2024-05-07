@@ -1,6 +1,7 @@
 import numpy as np
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras import layers, models
+from tensorflow.keras.callbacks import EarlyStopping
 import os
 import shutil
 from sklearn.metrics import classification_report, confusion_matrix
@@ -67,6 +68,8 @@ model = models.Sequential([
     layers.Dense(10, activation='softmax')
 ])
 
+early_stopping = EarlyStopping(monitor='val_loss', min_delta=0.01, patience=5, verbose=1, mode='min', restore_best_weights=True)
+
 model.compile(optimizer='adam',
               loss='categorical_crossentropy',  # Use categorical_crossentropy for multi-class classification
               metrics=['accuracy'])
@@ -75,7 +78,8 @@ model.compile(optimizer='adam',
 history = model.fit(
     train_generator,
     epochs=30,
-    validation_data=validation_generator
+    validation_data=validation_generator,
+    callbacks=[early_stopping]
 )
 
 test_generator = test_datagen.flow_from_directory(
@@ -138,3 +142,4 @@ plt.title('Confusion Matrix')
 plt.ylabel('Actual Label')
 plt.xlabel('Predicted Label')
 plt.savefig('confusionmatrix.png')
+
