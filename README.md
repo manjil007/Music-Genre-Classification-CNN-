@@ -52,13 +52,14 @@ Accuracy: 74% Leaderboard Position: 9 Date Submitted : 05/06/2024
 
 
 ### Contributions
-Manjil -
+Manjil - Worked on CNN, transfer learning, train, test, and evaluation. Worked on data visualization for the evaluation of the performance of the models. Also conducted experiments for model comparison and worked on data preprocessing, implementation of CNN, model evaluation, model comparision of the report. 
+
 
 Vincent - Worked on mlp.py and optimizing MLP parameters for highest possible accuracy using provided MLP sample code as reference. Worked on both MLP and optimization sections in the report.
 
 Erick - Worked on extracting spectrograms from audio files using Professor Estrada's sample code as a starting point. Also worked on extracting Chroma features and zero-crossing rate, though since they did not provide as high an accuracy they were discarded. Helped with MLP and Optimizations sections of the report.
 
-Abhinav - 
+Abhinav - Worked on transfer learning, audio processing, feature extraction, and evaluation. Also conducted experiments for model comparison and worked on transfer learning, model evaluation, model comparision, intro, and conclusion of the report. 
 
 ## Acknowledgments
 Thanks to Professor. Estrada, and Teaching Assistants for their support during the project. Thanks to the our classmates and the machine learning community at large for the inspiration and support to develop this project.
