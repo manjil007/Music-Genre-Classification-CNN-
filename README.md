@@ -1,93 +1,61 @@
-# Neural_Network
+# Logistic Regression Music Genre Classification
+
+This repository contains a machine learning project aimed at classifying music genres using a custom implementation of the Logistic Regression algorithm. The project is structured into two main components: feature extraction and model training & evaluation.
+
+## Getting Started
+
+### Prerequisites
+Ensure you have Python installed along with the libraries listed on requirements.txt file in the directory. This will ensure that the code is able to run smoothly with specific verisions.
+
+### Feature Extraction
+Before training the model, features must be extracted from audio files. This is done using the `process_data.py` script and `audio_processor.py` script. 
 
 
+### Model Training and Evaluation
+Once the features are extracted and saved as CSV files and PNG files, the model can be trained using the train.py script. Before running the script, make sure the paths to the pre-extracted feature CSV files are correctly set. 
 
-## Getting started
+Modify these lines in train.py to use your feature CSV files
+train_df = pd.read_csv('path/to/your/train_features.csv')
+test_df = pd.read_csv('path/to/your/test_features.csv')
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+The script will train the Convolutional Neural Network model, evaluate its performance, and save the predictions to a CSV file.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+### CNN Class
+The CNN class captures the convolutional neural network algorithm tailored specifically to the task of genre classifictaion based on images generated. This CNN is designed to handle pre-processed spectrogram images for classification into multiple categories.
 
-## Add your files
+### MLP Class
+The MLP class encapsulates the Multi-Layer Perceptron model using PyTorch framework. This type of neural network is particularly suited for classification tasks involving structured data.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+### transfer_learning Class
+The transfer_learning class is the application of transfer learning using the ResNet50 architecture, a pre-trained convolutional neural network provided by TensorFlow. This model is extensively adapted to perform image classification tasks on a new dataset that might have different classes from the dataset originally used to train ResNet50.
 
-```
-cd existing_repo
-git remote add origin https://lobogit.unm.edu/mpradhan/neural_network.git
-git branch -M main
-git push -uf origin main
-```
+### Running the Scripts and Description
 
-## Integrate with your tools
+1. **Feature Extraction**: The python script 'process_data.py' contains all functions necessary for the feature extraction from audio files and to creae a CSV file that will be used by our model. audio_processor.py contains functions necessary for extracting images like spectrograms from the audio files.
 
-- [ ] [Set up project integrations](https://lobogit.unm.edu/mpradhan/neural_network/-/settings/integrations)
+2. **Training Model**: The python script 'train.py' contains all functions necessary for the training of our model and generate predictions. Also prints out the cross validation accuracy as well as create a prediction file which can be submitted in the Kaggle to check accuracy. 
 
-## Collaborate with your team
+3. **Convolutional Neural network**: The python script 'cnn.py' contains the algorithm for convolutional neural network. 
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+3. **Multi-Layer Perceptron**: The python script 'mlp.py' contains the algorithm for multi-layer perceptron.
 
-## Test and Deploy
+3. **Transfer Learning**: The python script 'transfer_learning.py' contains the algorithm for transfer learning.
 
-Use the built-in continuous integration in GitLab.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+### Highest Kaggle Scores
+Accuracy: 83% Leaderboard Position: 2 Date Submitted : 05/07/2024
 
-***
+Accuracy: 74% Leaderboard Position: 9 Date Submitted : 05/06/2024
 
-# Editing this README
+### Contributions
+Manjil - Worked on CNN, transfer learning, train, test, and evaluation. Worked on data visualization for the evaluation of the performance of the models. Also conducted experiments for model comparison and worked on data preprocessing, implementation of CNN, model evaluation, model comparision of the report. 
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
 
-## Suggestions for a good README
+Vincent - Worked on mlp.py and optimizing MLP parameters for highest possible accuracy using provided MLP sample code as reference. Worked on both MLP and optimization sections in the report.
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+Erick - Worked on extracting spectrograms from audio files using Professor Estrada's sample code as a starting point. Also worked on extracting Chroma features and zero-crossing rate, though since they did not provide as high an accuracy they were discarded. Helped with MLP and Optimizations sections of the report.
 
-## Name
-Choose a self-explaining name for your project.
+Abhinav - Worked on transfer learning, audio processing, feature extraction, and evaluation. Also conducted experiments for model comparison and worked on transfer learning, model evaluation, model comparision, intro, and conclusion of the report. 
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+## Acknowledgments
+Thanks to Professor. Estrada, and Teaching Assistants for their support during the project. Thanks to the our classmates and the machine learning community at large for the inspiration and support to develop this project.
