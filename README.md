@@ -6,11 +6,42 @@ This repository contains a machine learning project aimed at classifying music g
 
 ### Prerequisites
 Ensure you have Python installed along with the following libraries:
-- NumPy
-- pandas
-- scikit-learn
-- librosa
-- matplotlib (optional, for plotting loss during training)
+audioread==3.0.1
+certifi==2024.2.2
+cffi==1.16.0
+charset-normalizer==3.3.2
+decorator==5.1.1
+idna==3.7
+joblib==1.4.0
+lazy_loader==0.4
+librosa==0.10.1
+llvmlite==0.42.0
+msgpack==1.0.8
+numba==0.59.1
+numpy==1.26.4
+packaging==24.0
+pandas==2.2.2
+platformdirs==4.2.0
+pooch==1.8.1
+pycparser==2.22
+python-dateutil==2.9.0.post0
+pytz==2024.1
+requests==2.31.0
+scikit-learn==1.4.2
+scipy==1.13.0
+six==1.16.0
+soundfile==0.12.1
+soxr==0.3.7
+threadpoolctl==3.4.0
+typing_extensions==4.11.0
+tzdata==2024.1
+urllib3==2.2.1
+
+torch~=2.3.0
+matplotlib~=3.8.4
+tensorflow~=2.16.1
+seaborn~=0.13.2
+pydub~=0.25.1
 
 ### Feature Extraction
 Before training the model, features must be extracted from audio files. This is done using the `process_data.py` script and `audio_processor.py` script. 
@@ -48,8 +79,8 @@ The transfer_learning class is the application of transfer learning using the Re
 
 
 ### Highest Kaggle Scores
+Accuracy: 83% Leaderboard Position: 2 Date Submitted : 05/07/2024
 Accuracy: 74% Leaderboard Position: 9 Date Submitted : 05/06/2024
-
 
 ### Contributions
 Manjil - Worked on CNN, transfer learning, train, test, and evaluation. Worked on data visualization for the evaluation of the performance of the models. Also conducted experiments for model comparison and worked on data preprocessing, implementation of CNN, model evaluation, model comparision of the report. 
